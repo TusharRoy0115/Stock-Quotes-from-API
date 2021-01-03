@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title_block %}
+    Delete Stock
+{% endblock title_block %}
+
+
+{% block body_block %}
+
+
+
+
+<h3>Are You Sure You want to delete this {{stock.ticker}} stock ? </h3>
+<form method="POST">
+{% csrf_token %}
+<input type="submit" name="submit" value="delete" class="btn btn-danger btn-sm">
+<a href="{% url 'quotes:add_stock' %}">Cancel</a>
+</form>
+{% endblock body_block %}
+    
+    

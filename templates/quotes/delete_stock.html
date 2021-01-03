@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+
+
+{% if ticker %}
+{% for item in ticker %}
+{{item}} - <a href="{% url 'quotes:del_stock' pk=item.id %}" class="btn btn-secondary"><i class="fa fa-times" style="color: red;"></i>Delete Stock  </a>
+<br> <br> 
+{% endfor %}
+
+{% else %}
+
+<p>You dont have any ticker</p>
+    
+{% endif %}
+    
+    
+   
+        
+{% endblock body_block %}
+    

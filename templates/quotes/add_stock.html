@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+    Add Stock
+{% endblock title_block %}
+    
+{% block body_block %}
+
+<h3>Add Stock</h3>
+<!-- : ${{api.latestPrice}} <br>
+: {{api.previousClose}} <br>
+: ${{api.marketCap}} <br>
+: {{api.ytdChange}} <br>
+: {{api.week52High}} <br>
+: -->
+
+<form method="POST">
+    {{form|crispy}}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary" >Add Stock</button>
+</form>
+<br>
+
+{% if tickers %}
+<table class="table table-striped table-bordered table-hover ">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Company Name</th>
+        <th scope="col">Stock Price </th>
+        <th scope="col">previous Close</th>
+        <th scope="col">Market Cap</th>
+        <th scope="col">YTD Change</th>
+        <th scope="col">52Wk High</th>
+        <th scope="col">52Wk Low</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+    
+        
+            {% for output_item in output %}
+            <tr>
+            <th scope="row">{{output_item.companyName}}</th>
+            <td>${{output_item.latestPrice}}</td>
+            <td>${{output_item.previousClose}}</td>
+            <td>${{output_item.marketCap}}</td>
+            <td>{{output_item.ytdChange}}%</td>
+            <td>${{output_item.week52High}}</td>
+            <td>${{output_item.week52Low}}</td>
+           
+          </tr>
+            {% endfor %}  
+      
+
+            
+    </tbody>
+  </table>
+  <br>
+  {% else %}
+  <h3 class="alert"> You Dont have any valid tickers!! </h3>
+{% endif %}
+
+    
+    
+
+{% endblock body_block %}
+
+    
